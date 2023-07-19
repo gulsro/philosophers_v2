@@ -23,13 +23,14 @@ t_philo	*init_philo_arr(t_shared_data *shared_data)
 		philo_arr[i].last_meal_time = philo_arr[i].start_time;
 		philo_arr[i].dead = 0;
 		philo_arr[i].done_eating = 0;
+		philo_arr[i].eaten_meals = 0;
 		i++;
 	}
 	return (philo_arr);
 }
 
 // Initializes both print mutex and fork mutexes --it will be called in init_threads_mutex_philo()
-static int	init_mutexes(t_shared_data *shared_data)
+static int	init_mutexes(t_shared_data *shared_data, t_philo *philo_arr)
 {
 	int	i;
 
@@ -44,14 +45,15 @@ static int	init_mutexes(t_shared_data *shared_data)
 			free(shared_data->fork);
 			return (0);
 		}
+		if (pthread_mutex_init(&philo_arr[i].private_mutex, NULL) != 0)
+		{
+			free(shared_data->fork);
+			return (0);
+		}
 			i++;
 	}
-	if (pthread_mutex_init(&shared_data->print, NULL) != 0)
-	{
-		free(shared_data->fork);
-		return (0);
-	}
-	if (pthread_mutex_init(&shared_data->meal, NULL) != 0)
+	if (pthread_mutex_init(&shared_data->print, NULL) != 0
+		|| pthread_mutex_init(&shared_data->meal, NULL) != 0)
 	{
 		free(shared_data->fork);
 		return (0);
@@ -103,7 +105,7 @@ static int	create_threads(t_shared_data *shared_data, t_philo *philo_arr)
 
 void	init_mutex_create_threads(t_shared_data *shared_data, t_philo *philo_arr)
 {
-	if (init_mutexes(shared_data) == 0)
+	if (init_mutexes(shared_data, philo_arr) == 0)
 		{
 				print_error("Pthread_mutex_init() is failed\n");
 				return ;

@@ -28,10 +28,17 @@ int	sleep_tight(long time, t_philo *philo)
 	//pthread_mutex_lock(&philo->shared_data->meal);
 	while (get_current_time() - start_time <= time)
 	{
+		//pthread_mutex_lock(&philo->shared_data->meal);
 		if (check_simulation_ends(philo) == 1)
+		{
+			//printf("KIJKKKK\n");
+			//pthread_mutex_unlock(&philo->shared_data->meal);
 			return (ERROR) ;
-		usleep(250);
+		}
+		//pthread_mutex_unlock(&philo->shared_data->meal);
+		usleep(1000);
 	}
+	//printf("KIJKKKK\n");
 	return (SUCCESS);
 	//pthread_mutex_unlock(&philo->shared_data->meal);
 }

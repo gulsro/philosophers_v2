@@ -35,7 +35,8 @@ typedef struct s_philo
 	int	right_fork_id;
 	int done_eating;
 	int	dead;
-//	int	must_eat_for_philo;
+	int eaten_meals;
+	pthread_mutex_t private_mutex;
 	struct s_shared_data *shared_data;
 }t_philo;
 
@@ -66,6 +67,7 @@ int		check_validation_and_init_arguments(t_shared_data *shared_data, int argc, c
 void    init_arguments(t_shared_data *shared_data, int argc, char **argv);
 
 //utils.c
+void thread_safe_print(char *print_msg, t_philo *philo);
 int	ft_atoi(char *str);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 
@@ -90,7 +92,8 @@ void    destroy_mutexes(t_shared_data *shared_data);
 
 //check_life_circle.c
 int check_simulation_ends(t_philo *philo);
-int check_philo_done_eating(t_philo *philo);
+int check_philo_tummy_full(t_philo *philo);
+int check_all_philos_done_eating(t_philo *philo);
 int	check_starvation(t_philo *philo);
 
 //process.c
