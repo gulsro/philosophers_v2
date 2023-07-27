@@ -30,7 +30,7 @@ t_philo	*init_philo_arr(t_shared_data *shared_data)
 }
 
 // Initializes both print mutex and fork mutexes --it will be called in init_threads_mutex_philo()
-static int	init_mutexes(t_shared_data *shared_data, t_philo *philo_arr)
+int	init_mutexes(t_shared_data *shared_data, t_philo *philo_arr)
 {
 	int	i;
 
@@ -42,21 +42,21 @@ static int	init_mutexes(t_shared_data *shared_data, t_philo *philo_arr)
 	{
 		if (pthread_mutex_init(&shared_data->fork[i], NULL) != 0)
 		{
-			free(shared_data->fork);
-			return (0);
+			print_error("Pthread_mutex_init() is failed\n");
+			return (free(shared_data->fork), 0);
 		}
 		if (pthread_mutex_init(&philo_arr[i].private_mutex, NULL) != 0)
 		{
-			free(shared_data->fork);
-			return (0);
+			print_error("Pthread_mutex_init() is failed\n");
+			return (free(shared_data->fork), 0);
 		}
 			i++;
 	}
 	if (pthread_mutex_init(&shared_data->print, NULL) != 0
 		|| pthread_mutex_init(&shared_data->meal, NULL) != 0)
 	{
-		free(shared_data->fork);
-		return (0);
+		print_error("Pthread_mutex_init() is failed\n");
+		return (free(shared_data->fork), 0);
 	}
 	return (1);
 }
@@ -79,7 +79,7 @@ int	join_threads(t_philo *philo_arr)
 }
 
 // Creates threads, philo's array and monitor_thread (a seperated thread for monitor_threading others threads) --it will be called in init_threads_mutex_philo()
-static int	create_threads(t_shared_data *shared_data, t_philo *philo_arr)
+int	create_threads(t_shared_data *shared_data, t_philo *philo_arr)
 {
 	int	i;
 
@@ -103,22 +103,22 @@ static int	create_threads(t_shared_data *shared_data, t_philo *philo_arr)
 	return (1);
 }
 
-void	init_mutex_create_threads(t_shared_data *shared_data, t_philo *philo_arr)
-{
-	if (init_mutexes(shared_data, philo_arr) == 0)
-		{
-				print_error("Pthread_mutex_init() is failed\n");
-				return ;
-		}
-	if (create_threads(shared_data, philo_arr) == 0)
-	{
-		print_error("Pthread_create() is failed\n");
-		return ;
-	}
-	if (join_threads(philo_arr) == 0)
-	{
-		print_error("Pthread_join() is failed\n");
-		free_all(shared_data);
-		return ;
-	}
-}
+// void	init_mutex_create_threads(t_shared_data *shared_data, t_philo *philo_arr)
+// {
+// 	if (init_mutexes(shared_data, philo_arr) == 0)
+// 		{
+// 				print_error("Pthread_mutex_init() is failed\n");
+// 				return ;
+// 		}
+// 	if (create_threads(shared_data, philo_arr) == 0)
+// 	{
+// 		print_error("Pthread_create() is failed\n");
+// 		return ;
+// 	}
+// 	if (join_threads(philo_arr) == 0)
+// 	{
+// 		print_error("Pthread_join() is failed\n");
+// 		free_all(shared_data);
+// 		return ;
+// 	}
+// }

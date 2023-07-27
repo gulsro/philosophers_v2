@@ -77,7 +77,10 @@ void    print_error(char *msg);
 //init.c
 t_philo	*init_philo_arr(t_shared_data *shared_data);
 void    init_mutex_create_threads(t_shared_data *shared_data, t_philo *philo_arr);
-//int	join_threads(t_shared_data *shared_data);
+int	init_mutexes(t_shared_data *shared_data, t_philo *philo_arr);
+int	join_threads(t_philo *philo_arr);
+int	create_threads(t_shared_data *shared_data, t_philo *philo_arr);
+
 
 //actions.c
 void    taking_forks(t_philo *philo);
@@ -95,6 +98,8 @@ int check_simulation_ends(t_philo *philo);
 int check_philo_tummy_full(t_philo *philo);
 int check_all_philos_done_eating(t_philo *philo);
 int	check_starvation(t_philo *philo);
+int check_philo_arr(t_shared_data *shared_data, t_philo *philo_arr);
+
 
 //process.c
 int	even_philo_id_routine(t_philo *philo);

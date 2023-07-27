@@ -70,3 +70,28 @@ int    check_starvation(t_philo *philo)
 	}
 	return (0);
 }
+
+int check_philo_arr(t_shared_data *shared_data, t_philo *philo_arr)
+{
+	int i;
+	while (1)
+	{
+		i = 0;
+		while (i < shared_data->number_of_philosophers)
+		{
+			//printf("WOOOO\n");
+			check_starvation(&philo_arr[i]);
+			if (philo_arr[i].dead == 1)
+				return (1);
+			if (check_simulation_ends(&philo_arr[i]) == 1)
+				return (1);
+			i++;
+		}
+		usleep(1000);
+	}
+	return (0);
+}
+
+
+
+
