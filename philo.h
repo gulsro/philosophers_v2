@@ -55,12 +55,13 @@ typedef struct s_shared_data
 	pthread_mutex_t	*fork;
 	pthread_mutex_t print;
 	pthread_mutex_t meal;
+	pthread_mutex_t stop_check;
 }t_shared_data;
 
 //time.c
 long	get_current_time(void);
 long	elapsed_time(long start_time);
-int    sleep_tight(long time, t_philo *philo);
+void	sleep_tight(long time);
 
 //input_validation.c
 int		check_validation_and_init_arguments(t_shared_data *shared_data, int argc, char **argv);
@@ -83,7 +84,7 @@ int	create_threads(t_shared_data *shared_data, t_philo *philo_arr);
 
 
 //actions.c
-void    taking_forks(t_philo *philo);
+//void    taking_forks(t_philo *philo);
 int    eating(t_philo *philo);
 void    thinking(t_philo *philo);
 int    sleeping(t_philo *philo);
@@ -94,11 +95,11 @@ int join_thread_cleanup(t_shared_data *shared_data, int thread_array_flag);
 void    destroy_mutexes(t_shared_data *shared_data);
 
 //check_life_circle.c
-int check_simulation_ends(t_philo *philo);
-int check_philo_tummy_full(t_philo *philo);
-int check_all_philos_done_eating(t_philo *philo);
-int	check_starvation(t_philo *philo);
-int check_philo_arr(t_shared_data *shared_data, t_philo *philo_arr);
+int check_simulation_ends(t_shared_data *shared_data);
+// int check_philo_tummy_full(t_philo *philo);
+// int check_all_philos_done_eating(t_philo *philo);
+int	check_starvation(t_philo *philo_arr, t_shared_data *shared_data);
+void check_routine(t_philo *philo_arr, t_shared_data *shared_data);
 
 
 //process.c

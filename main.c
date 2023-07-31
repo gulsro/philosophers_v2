@@ -14,11 +14,9 @@ int main(int argc, char **argv)
 	init_mutexes(&shared_data, philo_arr);
 	create_threads(&shared_data, philo_arr);
 	//init_mutex_create_threads(&shared_data, philo_arr);
-	if (check_philo_arr(&shared_data, philo_arr) == 1)
-	{
-		join_threads(philo_arr);
-		destroy_mutexes(&shared_data);
-		free_all(&shared_data);
-	}
+		// join_threads(philo_arr);
+		// destroy_mutexes(&shared_data);
+	join_threads(philo_arr);
+	free_all(&shared_data);
 	return (0);
 }

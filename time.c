@@ -20,30 +20,27 @@ long	elapsed_time(long start_time)
 	return (elapsed_time);
 }
 
-int	sleep_tight(long time, t_philo *philo)
+void	sleep_tight(long time)
 {
 	long start_time;
 
 	start_time = get_current_time();
-	//pthread_mutex_lock(&philo->shared_data->meal);
-	while (get_current_time() - start_time <= time)
-	{
-		//pthread_mutex_lock(&philo->shared_data->meal);
-		if (check_simulation_ends(philo) == 1)
-		{
-			//printf("KIJKKKK\n");
-			//pthread_mutex_unlock(&philo->shared_data->meal);
-			return (ERROR) ;
-		}
-		//pthread_mutex_unlock(&philo->shared_data->meal);
-		usleep(1000);
-	}
-	//printf("KIJKKKK\n");
-	return (SUCCESS);
-	//pthread_mutex_unlock(&philo->shared_data->meal);
+	while (get_current_time() - start_time < time)
+		usleep(time * 1000);
 }
-// 	long milisec;
 
-// 	milisec = time * 1000;
-// 	usleep(milisec);
+
+// void	ft_sleep(int time)
+// {
+// 	long	start;
+// 	long	elapsed;
+
+// 	start = find_ms();
+// 	elapsed = 0;
+// 	while (elapsed < time)
+// 	{
+// 		usleep(time * 1000);
+// 		elapsed = find_ms() - start;
+// 	}
 // }
+

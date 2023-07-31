@@ -53,7 +53,8 @@ int	init_mutexes(t_shared_data *shared_data, t_philo *philo_arr)
 			i++;
 	}
 	if (pthread_mutex_init(&shared_data->print, NULL) != 0
-		|| pthread_mutex_init(&shared_data->meal, NULL) != 0)
+		|| pthread_mutex_init(&shared_data->meal, NULL) != 0
+		|| pthread_mutex_init(&shared_data->stop_check, NULL) != 0)
 	{
 		print_error("Pthread_mutex_init() is failed\n");
 		return (free(shared_data->fork), 0);
