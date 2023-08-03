@@ -13,6 +13,7 @@ void *routine(void *arg) //ADD LAST NUMBER??
 		thread_safe_print("is thinking", philo);
 		eating(philo);
 		sleeping(philo);
+
 	}
-	return NULL;
+	return (NULL);
 }

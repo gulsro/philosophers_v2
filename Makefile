@@ -15,7 +15,7 @@ HEADER = philo.h
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=thread
 
 OBJ = $(SRC:.c=.o)
 

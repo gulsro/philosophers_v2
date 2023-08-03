@@ -25,7 +25,9 @@ int	check_starvation(t_shared_data *shared_data)
 		{
 			stop_simulation(shared_data);
 			if (philo_arr[i].must_eat != 0)
-				thread_safe_print("died", &philo_arr[i]);
+			{
+				printf("%ld %d %s\n", elapsed_time(philo_arr[i].start_time), philo_arr[i].id, "died");
+			}
 			return (1);
 		}
 		i++;
@@ -40,9 +42,5 @@ void	check_routine(t_shared_data *shared_data)
 		check_starvation(shared_data);
 		usleep(1000);
 	}
-	destroy_mutexes(shared_data);
+	return ;
 }
-
-
-
-

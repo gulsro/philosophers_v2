@@ -93,7 +93,6 @@ int	create_threads(t_shared_data *shared_data)
 			if (join_thread_cleanup(shared_data, 1) == 0)
 			{
 				print_error("Pthread_join() is failed\n");
-				free(shared_data->thread_arr);
 				return (0);
 			}
 		}

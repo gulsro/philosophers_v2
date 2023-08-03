@@ -69,7 +69,7 @@ void thread_safe_print(char *print_msg, t_philo *philo);
 int	ft_atoi(char *str);
 void	set_meal_time(t_philo *philo);
 long	last_meal_time(t_philo *philo);
-void stop_simulation(t_shared_data *shared_data);
+int stop_simulation(t_shared_data *shared_data);
 
 
 //error.c

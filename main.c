@@ -4,7 +4,6 @@
 int main(int argc, char **argv)
 {
 	t_shared_data	shared_data;
-	//t_philo *philo_arr;
 
 	if (check_validation_and_init_arguments(&shared_data, argc, argv) == 0)
 		return (print_error("Input validation is failed\n"), 0);
@@ -12,7 +11,7 @@ int main(int argc, char **argv)
 	if (shared_data.philo_arr == NULL)
 		return (print_error("Philo_arr creation is failed\n"), 0);
 	init_mutexes(&shared_data);
-	if(create_threads(&shared_data) == 0)
+	if (create_threads(&shared_data) == 0)
 		return (0);
 	check_routine(&shared_data);
 
@@ -20,6 +19,7 @@ int main(int argc, char **argv)
 		// join_threads(philo_arr);
 		// destroy_mutexes(&shared_data);
 	join_threads(&shared_data);
+	destroy_mutexes(&shared_data);
 	free_all(&shared_data);
 	return (0);
 }

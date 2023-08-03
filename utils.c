@@ -3,6 +3,7 @@
 void thread_safe_print(char *print_msg, t_philo *philo)
 {
 	int checker;
+
 	pthread_mutex_lock(&philo->shared_data->stop_check);
 	checker = philo->shared_data->stop_simulation;
 	pthread_mutex_unlock(&philo->shared_data->stop_check);
@@ -28,11 +29,12 @@ void	set_meal_time(t_philo *philo)
 	pthread_mutex_unlock(&philo->shared_data->meal);
 }
 
-void stop_simulation(t_shared_data *shared_data)
+int stop_simulation(t_shared_data *shared_data)
 {
 	pthread_mutex_lock(&shared_data->stop_check);
 	shared_data->stop_simulation = 1;
 	pthread_mutex_unlock(&shared_data->stop_check);
+	return (1);
 }
 
 int	ft_atoi(char *str)
