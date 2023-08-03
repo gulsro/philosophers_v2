@@ -4,21 +4,21 @@
 int main(int argc, char **argv)
 {
 	t_shared_data	shared_data;
-	t_philo *philo_arr;
+	//t_philo *philo_arr;
 
 	if (check_validation_and_init_arguments(&shared_data, argc, argv) == 0)
 		return (print_error("Input validation is failed\n"), 0);
-	philo_arr = init_philo_arr(&shared_data);
-	if (philo_arr == NULL)
+	shared_data.philo_arr = init_philo_arr(&shared_data);
+	if (shared_data.philo_arr == NULL)
 		return (print_error("Philo_arr creation is failed\n"), 0);
-	init_mutexes(&shared_data, philo_arr);
-	create_threads(&shared_data, philo_arr);
-	check_routine(philo_arr, &shared_data);
+	init_mutexes(&shared_data);
+	create_threads(&shared_data);
+	check_routine(&shared_data);
 
 	//init_mutex_create_threads(&shared_data, philo_arr);
 		// join_threads(philo_arr);
 		// destroy_mutexes(&shared_data);
-	join_threads(philo_arr);
+	join_threads(&shared_data);
 	free_all(&shared_data);
 	return (0);
 }

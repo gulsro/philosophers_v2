@@ -47,8 +47,8 @@ typedef struct s_shared_data
 	int	must_eat;
 	int	stop_simulation;
 	int philos_are_full;
+	t_philo *philo_arr;
 	pthread_t	*thread_arr;
-	pthread_t	monitor_thread;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t print;
 	pthread_mutex_t meal;
@@ -69,7 +69,7 @@ void thread_safe_print(char *print_msg, t_philo *philo);
 int	ft_atoi(char *str);
 void	set_meal_time(t_philo *philo);
 long	last_meal_time(t_philo *philo);
-void stop_simulation(t_philo *philo);
+void stop_simulation(t_shared_data *shared_data);
 
 
 //error.c
@@ -77,10 +77,10 @@ void    print_error(char *msg);
 
 //init.c
 t_philo	*init_philo_arr(t_shared_data *shared_data);
-void    init_mutex_create_threads(t_shared_data *shared_data, t_philo *philo_arr);
-int	init_mutexes(t_shared_data *shared_data, t_philo *philo_arr);
-int	join_threads(t_philo *philo_arr);
-int	create_threads(t_shared_data *shared_data, t_philo *philo_arr);
+//void    init_mutex_create_threads(t_shared_data *shared_data, t_philo *philo_arr);
+int	init_mutexes(t_shared_data *shared_data);
+int	join_threads(t_shared_data *shared_data);
+int	create_threads(t_shared_data *shared_data);
 
 
 //actions.c
@@ -98,8 +98,8 @@ void    destroy_mutexes(t_shared_data *shared_data);
 int check_simulation_ends(t_shared_data *shared_data);
 // int check_philo_tummy_full(t_philo *philo);
 // int check_all_philos_done_eating(t_philo *philo);
-int	check_starvation(t_philo *philo_arr, t_shared_data *shared_data);
-void check_routine(t_philo *philo_arr, t_shared_data *shared_data);
+int	check_starvation(t_shared_data *shared_data);
+void check_routine(t_shared_data *shared_data);
 
 
 //process.c

@@ -6,6 +6,7 @@ t_philo	*init_philo_arr(t_shared_data *shared_data)
 	t_philo *philo_arr;
 	int	i;
 
+	philo_arr = shared_data->philo_arr;
 	i = 0;
 	philo_arr = malloc(sizeof(t_philo) * shared_data->number_of_philosophers);
 	if (!philo_arr)
@@ -25,12 +26,11 @@ t_philo	*init_philo_arr(t_shared_data *shared_data)
 }
 
 // Initializes both print mutex and fork mutexes --it will be called in init_threads_mutex_philo()
-int	init_mutexes(t_shared_data *shared_data, t_philo *philo_arr)
+int	init_mutexes(t_shared_data *shared_data)
 {
 	int	i;
 
 	i = 0;
-	(void)philo_arr;
 	shared_data->fork = malloc(sizeof(pthread_mutex_t) * shared_data->number_of_philosophers);
 	if (!shared_data->fork)
 		return (0);
@@ -59,14 +59,14 @@ int	init_mutexes(t_shared_data *shared_data, t_philo *philo_arr)
 }
 
 //Joins philo's threads and  monitor_thread thread -- will be called in init_threads_mutex_philo()
-int	join_threads(t_philo *philo_arr)
+int	join_threads(t_shared_data *shared_data)
 {
 	int	i;
 
 	i = 0;
-	while (i < philo_arr->shared_data->number_of_philosophers)
+	while (i < shared_data->number_of_philosophers)
 	{
-		if (pthread_join(philo_arr->shared_data->thread_arr[i], NULL) != 0)
+		if (pthread_join(shared_data->thread_arr[i], NULL) != 0)
 		{
 			return (0);
 		}
@@ -76,10 +76,12 @@ int	join_threads(t_philo *philo_arr)
 }
 
 // Creates threads, philo's array and monitor_thread (a seperated thread for monitor_threading others threads) --it will be called in init_threads_mutex_philo()
-int	create_threads(t_shared_data *shared_data, t_philo *philo_arr)
+int	create_threads(t_shared_data *shared_data)
 {
+	t_philo *philo_arr;
 	int	i;
 
+	philo_arr = shared_data->philo_arr;
 	i = 0;
 	shared_data->thread_arr = malloc(sizeof(pthread_t) * shared_data->number_of_philosophers);
 	if (shared_data->thread_arr == NULL)
