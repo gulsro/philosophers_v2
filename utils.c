@@ -3,8 +3,32 @@
 void thread_safe_print(char *print_msg, t_philo *philo)
 {
 	pthread_mutex_lock(&philo->shared_data->print);
-	printf("%ld %d %s\n", elapsed_time(philo->start_time), philo->id, print_msg);
+	if (philo->shared_data->stop_simulation == 0)
+		printf("%ld %d %s\n", elapsed_time(philo->start_time), philo->id, print_msg);
 	pthread_mutex_unlock(&philo->shared_data->print);
+}
+
+long	last_meal_time(t_philo *philo)
+{
+	long	last_meal_time;
+	pthread_mutex_lock(&philo->shared_data->meal);
+	last_meal_time = philo->last_meal_time;
+	pthread_mutex_unlock(&philo->shared_data->meal);
+	return (last_meal_time);
+}
+
+void	set_meal_time(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->shared_data->meal);
+	philo->last_meal_time = get_current_time();
+	pthread_mutex_unlock(&philo->shared_data->meal);
+}
+
+void stop_simulation(t_shared_data *shared_data)
+{
+	pthread_mutex_lock(&shared_data->stop_check);
+	shared_data->stop_simulation = 1;
+	pthread_mutex_unlock(&shared_data->stop_check);
 }
 
 int	ft_atoi(char *str)
@@ -25,23 +49,4 @@ int	ft_atoi(char *str)
 		return (0);
 	}
 	return ((int)(n));
-}
-
-void	*ft_memcpy(void *dst, const void *src, size_t n)
-{
-	size_t		i;
-	char		*dst_y;
-	const char	*src_y;
-
-	dst_y = dst;
-	src_y = src;
-	i = 0;
-	if (!dst && !src)
-		return (NULL);
-	while (i < n)
-	{
-		dst_y[i] = src_y[i];
-		i++;
-	}
-	return (dst);
 }

@@ -15,15 +15,10 @@ t_philo	*init_philo_arr(t_shared_data *shared_data)
 		philo_arr[i].shared_data = shared_data;
 		philo_arr[i].number_of_philosophers = shared_data->number_of_philosophers;
 		philo_arr[i].id = i + 1;
-		// if (shared_data->must_eat != 0)
-		// 	philo_arr[i].must_eat_countdown = shared_data->must_eat;
-		// else
-		// 	philo_arr[i].must_eat_countdown = -1;
 		philo_arr[i].start_time = get_current_time();;
 		philo_arr[i].last_meal_time = philo_arr[i].start_time;
 		philo_arr[i].dead = 0;
-		philo_arr[i].done_eating = 0;
-		philo_arr[i].eaten_meals = 0;
+		philo_arr[i].must_eat = shared_data->must_eat;
 		i++;
 	}
 	return (philo_arr);
@@ -35,6 +30,7 @@ int	init_mutexes(t_shared_data *shared_data, t_philo *philo_arr)
 	int	i;
 
 	i = 0;
+	(void)philo_arr;
 	shared_data->fork = malloc(sizeof(pthread_mutex_t) * shared_data->number_of_philosophers);
 	if (!shared_data->fork)
 		return (0);
@@ -45,11 +41,11 @@ int	init_mutexes(t_shared_data *shared_data, t_philo *philo_arr)
 			print_error("Pthread_mutex_init() is failed\n");
 			return (free(shared_data->fork), 0);
 		}
-		if (pthread_mutex_init(&philo_arr[i].private_mutex, NULL) != 0)
-		{
-			print_error("Pthread_mutex_init() is failed\n");
-			return (free(shared_data->fork), 0);
-		}
+		// if (pthread_mutex_init(&philo_arr[i].private_mutex, NULL) != 0)
+		// {
+		// 	print_error("Pthread_mutex_init() is failed\n");
+		// 	return (free(shared_data->fork), 0);
+		// }
 			i++;
 	}
 	if (pthread_mutex_init(&shared_data->print, NULL) != 0

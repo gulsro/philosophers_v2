@@ -27,16 +27,14 @@
 typedef struct s_philo
 {
 	int	id;
-	//int	must_eat_countdown;
 	int	number_of_philosophers;
 	long	start_time;
 	long	last_meal_time;
 	int	left_fork_id;
 	int	right_fork_id;
-	int done_eating;
 	int	dead;
-	int eaten_meals;
-	pthread_mutex_t private_mutex;
+	int must_eat;
+	//pthread_mutex_t private_mutex;
 	struct s_shared_data *shared_data;
 }t_philo;
 
@@ -47,7 +45,6 @@ typedef struct s_shared_data
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	must_eat;
-	int must_eat_counter;
 	int	stop_simulation;
 	int philos_are_full;
 	pthread_t	*thread_arr;
@@ -70,7 +67,10 @@ void    init_arguments(t_shared_data *shared_data, int argc, char **argv);
 //utils.c
 void thread_safe_print(char *print_msg, t_philo *philo);
 int	ft_atoi(char *str);
-void	*ft_memcpy(void *dst, const void *src, size_t n);
+void	set_meal_time(t_philo *philo);
+long	last_meal_time(t_philo *philo);
+void stop_simulation(t_philo *philo);
+
 
 //error.c
 void    print_error(char *msg);
@@ -85,9 +85,9 @@ int	create_threads(t_shared_data *shared_data, t_philo *philo_arr);
 
 //actions.c
 //void    taking_forks(t_philo *philo);
-int    eating(t_philo *philo);
+void    eating(t_philo *philo);
 void    thinking(t_philo *philo);
-int    sleeping(t_philo *philo);
+void    sleeping(t_philo *philo);
 
 //destroy.c
 void    free_all(t_shared_data *shared_data);

@@ -3,6 +3,7 @@
 void	free_all(t_shared_data *shared_data)
 {
 	free(shared_data->thread_arr);
+	free(shared_data->fork);
 }
 
 /*This funtion joins threads and does clean-up in case of an error during creation of threads.
@@ -52,25 +53,21 @@ void	destroy_mutexes(t_shared_data *shared_data)
 	{
 		if (pthread_mutex_destroy(&shared_data->fork[i]) != 0)
 		{
-			print_error("pthread_mutex_destroy() is failed\n");
-			free(shared_data->fork);
+			printf("FORK\n");
 			return ;
 		}
 		i++;
 	}
 	if (pthread_mutex_destroy(&shared_data->print) != 0)
 	{
-		print_error("LELpthread_mutex_destroy() is failed");
-		free(shared_data->fork);
+		printf("PRINT\n");
 		return ;
 	}
 	if (pthread_mutex_destroy(&shared_data->meal) != 0)
 	{
-		print_error("LELpthread_mutex_destroy() is failed");
-		free(shared_data->fork);
+		printf("MEAL\n");
 		return ;
 	}
-	free(shared_data->fork);
 }
 
 

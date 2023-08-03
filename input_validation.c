@@ -35,12 +35,10 @@ void    init_arguments(t_shared_data *shared_data, int argc, char **argv)
     shared_data->time_to_eat = ft_atoi(argv[3]);
     shared_data->time_to_sleep = ft_atoi(argv[4]);
 	shared_data->stop_simulation = 0;
-	shared_data->philos_are_full = 0;
-	shared_data->must_eat_counter = 0;
     if (argc == 6)
         shared_data->must_eat = ft_atoi(argv[5]);
     else
-    	shared_data->must_eat = 0;
+    	shared_data->must_eat = -1;
 }
 
 
