@@ -41,7 +41,6 @@ void	check_routine(t_shared_data *shared_data)
 		usleep(1000);
 	}
 	destroy_mutexes(shared_data);
-
 }
 
 

@@ -2,8 +2,12 @@
 
 void thread_safe_print(char *print_msg, t_philo *philo)
 {
+	int checker;
+	pthread_mutex_lock(&philo->shared_data->stop_check);
+	checker = philo->shared_data->stop_simulation;
+	pthread_mutex_unlock(&philo->shared_data->stop_check);
 	pthread_mutex_lock(&philo->shared_data->print);
-	if (philo->shared_data->stop_simulation == 0)
+	if (checker == 0)
 		printf("%ld %d %s\n", elapsed_time(philo->start_time), philo->id, print_msg);
 	pthread_mutex_unlock(&philo->shared_data->print);
 }

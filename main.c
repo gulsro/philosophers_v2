@@ -12,7 +12,8 @@ int main(int argc, char **argv)
 	if (shared_data.philo_arr == NULL)
 		return (print_error("Philo_arr creation is failed\n"), 0);
 	init_mutexes(&shared_data);
-	create_threads(&shared_data);
+	if(create_threads(&shared_data) == 0)
+		return (0);
 	check_routine(&shared_data);
 
 	//init_mutex_create_threads(&shared_data, philo_arr);
