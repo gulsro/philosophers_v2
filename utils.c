@@ -37,6 +37,13 @@ int stop_simulation(t_shared_data *shared_data)
 	return (1);
 }
 
+void set_meal_number(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->shared_data->meal);
+	philo->must_eat--;
+	pthread_mutex_unlock(&philo->shared_data->meal);
+}
+
 int	ft_atoi(char *str)
 {
 	int				i;

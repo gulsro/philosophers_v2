@@ -2,6 +2,8 @@
 
 void	eating(t_philo *philo)
 {
+	// if (philo->id == philo->number_of_philosophers)
+	// 	usleep(100);
 	pthread_mutex_lock(&philo->shared_data->fork[philo->id - 1]);
 	thread_safe_print("has taken a fork", philo);
 	pthread_mutex_lock(&philo->shared_data->fork[philo->id % philo->shared_data->number_of_philosophers]);

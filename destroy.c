@@ -2,8 +2,9 @@
 
 void	free_all(t_shared_data *shared_data)
 {
-	free(shared_data->thread_arr); // not correct dealloc whole array
-	free(shared_data->fork); //same here
+	free(shared_data->philo_arr);
+	free(shared_data->thread_arr);
+	free(shared_data->fork);
 }
 
 /*This funtion joins threads and does clean-up in case of an error during creation of threads.

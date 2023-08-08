@@ -100,23 +100,3 @@ int	create_threads(t_shared_data *shared_data)
 	}
 	return (1);
 }
-
-// void	init_mutex_create_threads(t_shared_data *shared_data, t_philo *philo_arr)
-// {
-// 	if (init_mutexes(shared_data, philo_arr) == 0)
-// 		{
-// 				print_error("Pthread_mutex_init() is failed\n");
-// 				return ;
-// 		}
-// 	if (create_threads(shared_data, philo_arr) == 0)
-// 	{
-// 		print_error("Pthread_create() is failed\n");
-// 		return ;
-// 	}
-// 	if (join_threads(philo_arr) == 0)
-// 	{
-// 		print_error("Pthread_join() is failed\n");
-// 		free_all(shared_data);
-// 		return ;
-// 	}
-// }

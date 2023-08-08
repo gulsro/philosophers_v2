@@ -1,6 +1,10 @@
 #include "philo.h"
 
-//number_of_philosophers~~time_to_die~~time_to_eat~~time_to_sleep
+void leakss()
+{
+	system("leaks philo");
+}
+
 int main(int argc, char **argv)
 {
 	t_shared_data	shared_data;
@@ -14,12 +18,10 @@ int main(int argc, char **argv)
 	if (create_threads(&shared_data) == 0)
 		return (0);
 	check_routine(&shared_data);
-
-	//init_mutex_create_threads(&shared_data, philo_arr);
-		// join_threads(philo_arr);
-		// destroy_mutexes(&shared_data);
 	join_threads(&shared_data);
 	destroy_mutexes(&shared_data);
 	free_all(&shared_data);
+	while (1)
+		atexit(leakss);
 	return (0);
 }
