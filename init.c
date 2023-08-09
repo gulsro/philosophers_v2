@@ -41,11 +41,6 @@ int	init_mutexes(t_shared_data *shared_data)
 			print_error("Pthread_mutex_init() is failed\n");
 			return (free(shared_data->fork), 0);
 		}
-		// if (pthread_mutex_init(&philo_arr[i].private_mutex, NULL) != 0)
-		// {
-		// 	print_error("Pthread_mutex_init() is failed\n");
-		// 	return (free(shared_data->fork), 0);
-		// }
 			i++;
 	}
 	if (pthread_mutex_init(&shared_data->print, NULL) != 0

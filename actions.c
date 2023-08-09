@@ -9,7 +9,7 @@ void	eating(t_philo *philo)
 	pthread_mutex_lock(&philo->shared_data->fork[philo->id % philo->shared_data->number_of_philosophers]);
 	thread_safe_print("has taken a fork", philo);
 	set_meal_time(philo);
-	philo->must_eat--;
+	set_meal_number(philo);
 	thread_safe_print("is eating", philo);
 	sleep_tight(philo->shared_data->time_to_eat);
 	pthread_mutex_unlock(&philo->shared_data->fork[philo->id - 1]);

@@ -26,7 +26,7 @@ void	sleep_tight(long time)
 
 	start_time = get_current_time();
 	while (get_current_time() - start_time < time)
-		usleep(time * 1000);
+		usleep(1000);
 }
 
 

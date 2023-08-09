@@ -1,9 +1,9 @@
 #include "philo.h"
 
-void leakss()
-{
-	system("leaks philo");
-}
+// void leakss()
+// {
+// 	system("leaks philo");
+// }
 
 int main(int argc, char **argv)
 {
@@ -21,7 +21,7 @@ int main(int argc, char **argv)
 	join_threads(&shared_data);
 	destroy_mutexes(&shared_data);
 	free_all(&shared_data);
-	while (1)
-		atexit(leakss);
+	// while (1)
+	// 	atexit(leakss);
 	return (0);
 }

@@ -30,8 +30,6 @@ typedef struct s_philo
 	int	number_of_philosophers;
 	long	start_time;
 	long	last_meal_time;
-	int	left_fork_id;
-	int	right_fork_id;
 	int	dead;
 	int must_eat;
 	//pthread_mutex_t private_mutex;
@@ -101,6 +99,7 @@ int check_simulation_ends(t_shared_data *shared_data);
 // int check_philo_tummy_full(t_philo *philo);
 // int check_all_philos_done_eating(t_philo *philo);
 int	check_starvation(t_shared_data *shared_data);
+int check_meals_done(t_shared_data *shared_data);
 void check_routine(t_shared_data *shared_data);
 
 
