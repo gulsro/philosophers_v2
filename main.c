@@ -5,10 +5,11 @@
 // 	system("leaks philo");
 // }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_shared_data	shared_data;
 
+	//atexit(leakss);
 	if (check_validation_and_init_arguments(&shared_data, argc, argv) == 0)
 		return (print_error("Input validation is failed\n"), 0);
 	shared_data.philo_arr = init_philo_arr(&shared_data);
@@ -21,7 +22,5 @@ int main(int argc, char **argv)
 	join_threads(&shared_data);
 	destroy_mutexes(&shared_data);
 	free_all(&shared_data);
-	// while (1)
-	// 	atexit(leakss);
 	return (0);
 }

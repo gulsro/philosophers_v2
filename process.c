@@ -1,8 +1,8 @@
 #include "philo.h"
 
-void *routine(void *arg) //ADD LAST NUMBER??
+void	*routine(void *arg)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = (t_philo *)arg;
 	if (philo->shared_data->number_of_philosophers == 1)
@@ -18,7 +18,6 @@ void *routine(void *arg) //ADD LAST NUMBER??
 		thread_safe_print("is thinking", philo);
 		eating(philo);
 		sleeping(philo);
-
 	}
 	return (NULL);
 }

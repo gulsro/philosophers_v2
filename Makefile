@@ -1,8 +1,9 @@
 NAME = philo
 
 SRC = main.c \
-	time.c \
 		utils.c \
+		utils_2.c \
+		time.c \
 		input_validation.c \
 		error.c \
 		init.c \
@@ -15,7 +16,7 @@ HEADER = philo.h
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=thread #-fsanitize=address 
+CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address #-fsanitize=thread
 
 OBJ = $(SRC:.c=.o)
 
