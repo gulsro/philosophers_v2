@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   init.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: gozturk <marvin@codam.nl>                    +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/08/24 14:03:45 by gozturk       #+#    #+#                 */
+/*   Updated: 2023/08/24 14:03:46 by gozturk       ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 t_philo	*init_philo_arr(t_shared_data *shared_data)
@@ -41,7 +53,7 @@ int	init_mutexes(t_shared_data *shared_data)
 			print_error("Pthread_mutex_init() is failed\n");
 			return (free(shared_data->fork), 0);
 		}
-			i++;
+		i++;
 	}
 	if (pthread_mutex_init(&shared_data->print, NULL) != 0
 		|| pthread_mutex_init(&shared_data->meal, NULL) != 0
