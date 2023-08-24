@@ -97,11 +97,7 @@ int	create_threads(t_shared_data *shared_data)
 		if (pthread_create(&philo_arr->shared_data->thread_arr[i],
 				NULL, (void *)routine, (void *)&philo_arr[i]) != 0)
 		{
-			if (join_thread_cleanup(shared_data, 1) == 0)
-			{
-				print_error("Pthread_join() is failed\n");
-				return (0);
-			}
+			return(free_all(shared_data), 0);
 		}
 		i++;
 	}

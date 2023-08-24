@@ -29,31 +29,31 @@ void	free_all(t_shared_data *shared_data)
 **	thread_array_flag = 0 >> Function joins
 	all threads (array and also single monitor thread)
 */
-int	join_thread_cleanup(t_shared_data *shared_data, int thread_array_flag)
-{
-	int	i;
+// int	join_thread_cleanup(t_shared_data *shared_data, int thread_array_flag)
+// {
+// 	int	i;
 
-	i = 0;
-	if (thread_array_flag == 1)
-	{
-		while (i >= 0)
-		{
-			if (pthread_join(shared_data->thread_arr[i], NULL) != 0)
-				return (free_all(shared_data), 0);
-			i--;
-		}
-	}
-	if (thread_array_flag == 0)
-	{
-		while (i < shared_data->number_of_philosophers)
-		{
-			if (pthread_join(shared_data->thread_arr[i], NULL) != 0)
-				return (free_all(shared_data), 0);
-			i++;
-		}
-	}
-	return (free_all(shared_data), 1);
-}
+// 	i = 0;
+// 	if (thread_array_flag == 1)
+// 	{
+// 		while (i >= 0)
+// 		{
+// 			if (pthread_join(shared_data->thread_arr[i], NULL) != 0)
+// 				return (free_all(shared_data), 0);
+// 			i--;
+// 		}
+// 	}
+// 	if (thread_array_flag == 0)
+// 	{
+// 		while (i < shared_data->number_of_philosophers)
+// 		{
+// 			if (pthread_join(shared_data->thread_arr[i], NULL) != 0)
+// 				return (free_all(shared_data), 0);
+// 			i++;
+// 		}
+// 	}
+// 	return (free_all(shared_data), 1);
+// }
 
 void	destroy_mutexes(t_shared_data *shared_data)
 {
