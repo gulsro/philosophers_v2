@@ -12,7 +12,7 @@ int	check_simulation_ends(t_shared_data *shared_data)
 	return (0);
 }
 
-int	check_starvation(t_shared_data *shared_data)
+void	check_starvation(t_shared_data *shared_data)
 {
 	t_philo	*philo_arr;
 	int		i;
@@ -32,11 +32,10 @@ int	check_starvation(t_shared_data *shared_data)
 					philo_arr[i].id, "died");
 			}
 			pthread_mutex_unlock(&shared_data->meal);
-			return (1);
+			return ;
 		}
 		i++;
 	}
-	return (0);
 }
 
 void	check_routine(t_shared_data *shared_data)

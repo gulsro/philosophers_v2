@@ -90,8 +90,7 @@ void	destroy_mutexes(t_shared_data *shared_data);
 
 //check_life_circle.c
 int		check_simulation_ends(t_shared_data *shared_data);
-int		check_starvation(t_shared_data *shared_data);
-int		check_meals_done(t_shared_data *shared_data);
+void	check_starvation(t_shared_data *shared_data);
 void	check_routine(t_shared_data *shared_data);
 
 //process.c
