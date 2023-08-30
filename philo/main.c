@@ -23,7 +23,12 @@ int	main(int argc, char **argv)
 		return (print_error("Philo_arr creation is failed\n"), 0);
 	init_mutexes(&shared_data);
 	if (create_threads(&shared_data) == 0)
+	{
+		destroy_mutexes(&shared_data);
+		pthread_mutex_unlock(&shared_data.create);
+		free_all(&shared_data);
 		return (0);
+	}
 	check_routine(&shared_data);
 	join_threads(&shared_data);
 	destroy_mutexes(&shared_data);

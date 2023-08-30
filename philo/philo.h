@@ -41,12 +41,15 @@ typedef struct s_shared_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				must_eat;
+	int				created_threads;	
+	
 	int				stop_simulation;
 	int				philos_are_full;
 	t_philo			*philo_arr;
 	pthread_t		*thread_arr;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	print;
+	pthread_mutex_t	create;
 	pthread_mutex_t	meal;
 	pthread_mutex_t	stop_check;
 }t_shared_data;
@@ -85,8 +88,8 @@ void	sleeping(t_philo *philo);
 
 //destroy.c
 void	free_all(t_shared_data *shared_data);
-int		join_thread_cleanup(t_shared_data *shared_data, int thread_array_flag);
 void	destroy_mutexes(t_shared_data *shared_data);
+void	detach_threads(pthread_t *thread_arr, int i);
 
 //check_life_circle.c
 int		check_simulation_ends(t_shared_data *shared_data);

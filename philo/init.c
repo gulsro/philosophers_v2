@@ -57,7 +57,8 @@ int	init_mutexes(t_shared_data *shared_data)
 	}
 	if (pthread_mutex_init(&shared_data->print, NULL) != 0
 		|| pthread_mutex_init(&shared_data->meal, NULL) != 0
-		|| pthread_mutex_init(&shared_data->stop_check, NULL) != 0)
+		|| pthread_mutex_init(&shared_data->stop_check, NULL)
+		|| pthread_mutex_init(&shared_data->create, NULL) != 0)
 	{
 		print_error("Pthread_mutex_init() is failed\n");
 		return (free(shared_data->fork), 0);
@@ -92,14 +93,18 @@ int	create_threads(t_shared_data *shared_data)
 			* shared_data->number_of_philosophers);
 	if (shared_data->thread_arr == NULL)
 		return (0);
+	pthread_mutex_lock(&shared_data->create);
 	while (i < shared_data->number_of_philosophers)
 	{
 		if (pthread_create(&philo_arr->shared_data->thread_arr[i],
 				NULL, (void *)routine, (void *)&philo_arr[i]) != 0)
 		{
-			return(free_all(shared_data), 0);
+			detach_threads(shared_data->thread_arr, i);
+			return (0);
 		}
+		shared_data->created_threads++;
 		i++;
 	}
+	pthread_mutex_unlock(&shared_data->create);
 	return (1);
 }

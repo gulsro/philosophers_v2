@@ -45,6 +45,7 @@ void	init_arguments(t_shared_data *shared_data, int argc, char **argv)
 	shared_data->time_to_eat = ft_atoi(argv[3]);
 	shared_data->time_to_sleep = ft_atoi(argv[4]);
 	shared_data->stop_simulation = 0;
+	shared_data->created_threads = 0;
 	if (argc == 6)
 		shared_data->must_eat = ft_atoi(argv[5]);
 	else
@@ -69,6 +70,11 @@ int	check_validation_and_init_arguments(t_shared_data *shared_data,
 	if (shared_data->number_of_philosophers < 1)
 	{
 		print_error("There should be at least one philosopher\n");
+		return (0);
+	}
+	if (shared_data->number_of_philosophers > 2000)
+	{
+		print_error("Try with a lower number of philosophers\n");
 		return (0);
 	}
 	return (1);

@@ -35,3 +35,8 @@ void	set_meal_number(t_philo *philo)
 	philo->must_eat--;
 	pthread_mutex_unlock(&philo->shared_data->meal);
 }
+
+// int check_thread_creation(t_shared_data *shared_data)
+// {
+	
+// }
