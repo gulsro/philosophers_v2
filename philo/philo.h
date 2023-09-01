@@ -41,8 +41,7 @@ typedef struct s_shared_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				must_eat;
-	int				created_threads;	
-	
+	int				created_threads;
 	int				stop_simulation;
 	int				philos_are_full;
 	t_philo			*philo_arr;

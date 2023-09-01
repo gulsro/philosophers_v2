@@ -100,6 +100,7 @@ int	create_threads(t_shared_data *shared_data)
 				NULL, (void *)routine, (void *)&philo_arr[i]) != 0)
 		{
 			detach_threads(shared_data->thread_arr, i);
+			pthread_mutex_unlock(&shared_data->create);
 			return (0);
 		}
 		shared_data->created_threads++;

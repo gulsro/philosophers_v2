@@ -35,7 +35,8 @@ void	destroy_mutexes(t_shared_data *shared_data)
 	}
 	if (pthread_mutex_destroy(&shared_data->print) != 0
 		|| pthread_mutex_destroy(&shared_data->meal) != 0
-		|| pthread_mutex_destroy(&shared_data->stop_check) != 0)
+		|| pthread_mutex_destroy(&shared_data->stop_check) != 0
+		|| pthread_mutex_destroy(&shared_data->create) != 0)
 	{
 		printf("pthread_mutex_destroy failed\n");
 		return ;

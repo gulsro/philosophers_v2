@@ -12,6 +12,12 @@
 
 #include "philo.h"
 
+static	void	unlock_stop_simulation(t_philo *philo)
+{
+	pthread_mutex_unlock(&philo->shared_data->create);
+	stop_simulation(philo->shared_data);
+}
+
 void	*routine(void *arg)
 {
 	t_philo	*philo;
@@ -19,11 +25,7 @@ void	*routine(void *arg)
 	philo = (t_philo *)arg;
 	pthread_mutex_lock(&philo->shared_data->create);
 	if (philo->shared_data->created_threads != philo->number_of_philosophers)
-	{
-		printf("created = %d\n", philo->shared_data->created_threads);
-		stop_simulation(philo->shared_data);
-		return (NULL);
-	}
+		return (unlock_stop_simulation(philo), NULL);
 	pthread_mutex_unlock(&philo->shared_data->create);
 	if (philo->shared_data->number_of_philosophers == 1)
 	{
